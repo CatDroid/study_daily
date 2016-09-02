@@ -1,0 +1,218 @@
+
+live服务端打印 客户端请求和服务端回应
+
+streamuser 客户端
+
+W/TOM     ( 3586): mjpeg live start
+W/TOM     ( 3586): launching worker thread
+W/TOM     ( 3586): videoServerMediaSubsession construct!
+W/TOM     ( 3586): listenRTSP url = rtsp://0.0.0.0:8554/mjpg_streamer , add_done = 1
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 157 new bytes:DESCRIBE rtsp://192.168.43.1:8554/mjpg_streamer RTSP/1.0
+D/LIVE    ( 3586): CSeq: 2
+D/LIVE    ( 3586): User-Agent: stream play (LIVE555 Streaming Media v2016.04.21)
+D/LIVE    ( 3586): Accept: application/sdp
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "DESCRIBE", urlPreSuffix "", urlSuffix "mjpg_streamer", CSeq "2", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): videoServerMediaSubsession createNewStreamSource!
+W/TOM     ( 3586): open with mfd 46, filesize 100233, mBuffer 0xefef0000
+W/TOM     ( 3586): read with mfd 46, filesize 100233, mBuffer 0xefef0000
+W/TOM     ( 3586): videoServerMediaSubsession createNewRTPSink!
+W/TOM     ( 3586): ~v4l2JPEGDeviceSource free mBuffer
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 2
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:08:09 GMT
+D/LIVE    ( 3586): Content-Base: rtsp://192.168.43.1:8554/mjpg_streamer/
+D/LIVE    ( 3586): Content-Type: application/sdp
+D/LIVE    ( 3586): Content-Length: 344
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): v=0
+D/LIVE    ( 3586): o=- 1262311651739046 1 IN IP4 0.0.0.0
+D/LIVE    ( 3586): s=Session streamed by v4l2 camera
+D/LIVE    ( 3586): i=mjpg_streamer
+D/LIVE    ( 3586): t=0 0
+D/LIVE    ( 3586): a=tool:LIVE555 Streaming Media v2016.08.07
+D/LIVE    ( 3586): a=type:broadcast
+D/LIVE    ( 3586): a=control:*
+D/LIVE    ( 3586): a=range:npt=0-
+D/LIVE    ( 3586): a=x-qt-text-nam:Session streamed by v4l2 camera
+D/LIVE    ( 3586): a=x-qt-text-inf:mjpg_streamer
+D/LIVE    ( 3586): m=video 0 RTP/AVP 26
+D/LIVE    ( 3586): c=IN IP4 0.0.0.0
+D/LIVE    ( 3586): b=AS:15000
+D/LIVE    ( 3586): a=control:track1
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 184 new bytes:SETUP rtsp://192.168.43.1:8554/mjpg_streamer/track1 RTSP/1.0
+D/LIVE    ( 3586): CSeq: 3
+D/LIVE    ( 3586): User-Agent: stream play (LIVE555 Streaming Media v2016.04.21)
+D/LIVE    ( 3586): Transport: RTP/AVP/TCP;unicast;interleaved=0-1
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "SETUP", urlPreSuffix "mjpg_streamer", urlSuffix "track1", CSeq "3", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): videoServerMediaSubsession createNewStreamSource!
+W/TOM     ( 3586): open with mfd 46, filesize 100233, mBuffer 0xeff03000
+W/TOM     ( 3586): read with mfd 46, filesize 100233, mBuffer 0xeff03000
+W/TOM     ( 3586): videoServerMediaSubsession createNewRTPSink!
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 3
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:08:09 GMT
+D/LIVE    ( 3586): Transport: RTP/AVP/TCP;unicast;destination=192.168.43.133;source=192.168.43.1;interleaved=0-1
+D/LIVE    ( 3586): Session: 75916C8D;timeout=65
+D/LIVE    ( 3586):
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 167 new bytes:PLAY rtsp://192.168.43.1:8554/mjpg_streamer/ RTSP/1.0
+D/LIVE    ( 3586): CSeq: 4
+D/LIVE    ( 3586): User-Agent: stream play (LIVE555 Streaming Media v2016.04.21)
+D/LIVE    ( 3586): Session: 75916C8D
+D/LIVE    ( 3586): Range: npt=0.000-
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "PLAY", urlPreSuffix "mjpg_streamer", urlSuffix "", CSeq "4", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): initial statistics
+W/TOM     ( 3586): mFramecountTotal = 1
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 4
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:08:09 GMT
+D/LIVE    ( 3586): Range: npt=0.000-
+D/LIVE    ( 3586): Session: 75916C8D
+D/LIVE    ( 3586): RTP-Info: url=rtsp://192.168.43.1:8554/mjpg_streamer/track1;seq=32751;rtptime=2298953230
+
+.......
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 152 new bytes:TEARDOWN rtsp://192.168.43.1:8554/mjpg_streamer/ RTSP/1.0
+D/LIVE    ( 3586): CSeq: 5
+D/LIVE    ( 3586): User-Agent: stream play (LIVE555 Streaming Media v2016.04.21)
+D/LIVE    ( 3586): Session: 4B4F37F9
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "TEARDOWN", urlPreSuffix "mjpg_streamer", urlSuffix "", CSeq "5", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): ~v4l2JPEGDeviceSource free mBuffer
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 5
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:10:02 GMT
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read -1 new bytes (of 20000); terminating connection!
+
+
+客户端是VLC:
+
+
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 132 new bytes:OPTIONS rtsp://192.168.43.1:8554/mjpg_streamer RTSP/1.0
+D/LIVE    ( 3586): CSeq: 2
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "OPTIONS", urlPreSuffix "", urlSuffix "mjpg_streamer", CSeq "2", Content-Length 0, with 0 bytes following the message.
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 2
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:33 GMT
+D/LIVE    ( 3586): Public: OPTIONS, DESCRIBE, SETUP, TEARDOWN, PLAY, PAUSE, GET_PARAMETER, SET_PARAMETER
+D/LIVE    ( 3586):
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 158 new bytes:DESCRIBE rtsp://192.168.43.1:8554/mjpg_streamer RTSP/1.0
+D/LIVE    ( 3586): CSeq: 3
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586): Accept: application/sdp
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "DESCRIBE", urlPreSuffix "", urlSuffix "mjpg_streamer", CSeq "3", Content-Length 0, with 0 bytes following the message.
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 3
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:33 GMT
+D/LIVE    ( 3586): Content-Base: rtsp://192.168.43.1:8554/mjpg_streamer/
+D/LIVE    ( 3586): Content-Type: application/sdp
+D/LIVE    ( 3586): Content-Length: 344
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): v=0
+D/LIVE    ( 3586): o=- 1262311651739046 1 IN IP4 0.0.0.0
+D/LIVE    ( 3586): s=Session streamed by v4l2 camera
+D/LIVE    ( 3586): i=mjpg_streamer
+D/LIVE    ( 3586): t=0 0
+D/LIVE    ( 3586): a=tool:LIVE555 Streaming Media v2016.08.07
+D/LIVE    ( 3586): a=type:broadcast
+D/LIVE    ( 3586): a=control:*
+D/LIVE    ( 3586): a=range:npt=0-
+D/LIVE    ( 3586): a=x-qt-text-nam:Session streamed by v4l2 camera
+D/LIVE    ( 3586): a=x-qt-text-inf:mjpg_streamer
+D/LIVE    ( 3586): m=video 0 RTP/AVP 26
+D/LIVE    ( 3586): c=IN IP4 0.0.0.0
+D/LIVE    ( 3586): b=AS:15000
+D/LIVE    ( 3586): a=control:track1
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 189 new bytes:SETUP rtsp://192.168.43.1:8554/mjpg_streamer/track1 RTSP/1.0
+D/LIVE    ( 3586): CSeq: 4
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586): Transport: RTP/AVP;unicast;client_port=54348-54349
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "SETUP", urlPreSuffix "mjpg_streamer", urlSuffix "track1", CSeq "4", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): videoServerMediaSubsession createNewStreamSource!
+W/TOM     ( 3586): open with mfd 46, filesize 100233, mBuffer 0xefef0000
+W/TOM     ( 3586): read with mfd 46, filesize 100233, mBuffer 0xefef0000
+W/TOM     ( 3586): videoServerMediaSubsession createNewRTPSink!
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 4
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:33 GMT
+D/LIVE    ( 3586): Transport: RTP/AVP;unicast;destination=192.168.43.133;source=192.168.43.1;client_port=54348-54349;server_port=6970-6971
+D/LIVE    ( 3586): Session: C04BA400;timeout=65
+D/LIVE    ( 3586):
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 168 new bytes:PLAY rtsp://192.168.43.1:8554/mjpg_streamer/ RTSP/1.0
+D/LIVE    ( 3586): CSeq: 5
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586): Session: C04BA400
+D/LIVE    ( 3586): Range: npt=0.000-
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "PLAY", urlPreSuffix "mjpg_streamer", urlSuffix "", CSeq "5", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): initial statistics
+W/TOM     ( 3586): mFramecountTotal = 1
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 5
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:33 GMT
+D/LIVE    ( 3586): Range: npt=0.000-
+D/LIVE    ( 3586): Session: C04BA400
+D/LIVE    ( 3586): RTP-Info: url=rtsp://192.168.43.1:8554/mjpg_streamer/track1;seq=21069;rtptime=1438927092
+D/LIVE    ( 3586):
+
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 158 new bytes:GET_PARAMETER rtsp://192.168.43.1:8554/mjpg_streamer/ RTSP/1.0
+D/LIVE    ( 3586): CSeq: 6
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586): Session: C04BA400
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "GET_PARAMETER", urlPreSuffix "mjpg_streamer", urlSuffix "", CSeq "6", Content-Length 0, with 0 bytes following the message.
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 6
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:33 GMT
+D/LIVE    ( 3586): Session: C04BA400
+D/LIVE    ( 3586): Content-Length: 10
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): 2016.08.07
+
+.............................
+
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read 153 new bytes:TEARDOWN rtsp://192.168.43.1:8554/mjpg_streamer/ RTSP/1.0
+D/LIVE    ( 3586): CSeq: 7
+D/LIVE    ( 3586): User-Agent: LibVLC/2.2.4 (LIVE555 Streaming Media v2016.02.22)
+D/LIVE    ( 3586): Session: C04BA400
+D/LIVE    ( 3586):
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): parseRTSPRequestString() succeeded, returning cmdName "TEARDOWN", urlPreSuffix "mjpg_streamer", urlSuffix "", CSeq "7", Content-Length 0, with 0 bytes following the message.
+W/TOM     ( 3586): ~v4l2JPEGDeviceSource free mBuffer
+D/LIVE    ( 3586): sending response: RTSP/1.0 200 OK
+D/LIVE    ( 3586): CSeq: 7
+D/LIVE    ( 3586): Date: Fri, Jan 01 2010 02:16:35 GMT
+D/LIVE    ( 3586):
+D/LIVE    ( 3586): RTSPClientConnection[0xefee6000]::handleRequestBytes() read -1 new bytes (of 20000); terminating connection!
+
