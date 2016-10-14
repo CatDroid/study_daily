@@ -1,0 +1,97 @@
+
+
+STL中的容器按存储方式分为两类
+1.按以数组形式存储的容器		如：vector deque
+2.以不连续的节点形式存储的容器	如：list set map
+
+
+-------------------------------------------------------------------------------------------------------
+list::erase
+
+这里“++”运算符与我们平常的理解刚好相反
+erase( itList++) 是先获取下一个元素的位置在删除
+erase( ++itList) 是删除下一个元素 又指向它 但是没有删除当前元素
+
+
+正确使用:
+std::list< int> List;
+std::list< int>::iterator itList;
+for( itList = List.begin(); itList != List.end(); )
+{
+	if( WillDelete( *itList) )
+	{
+	   itList = List.erase( itList); // 通过erase方法的返回值来获取下一个元素的位置
+	}
+	else
+	   itList++;
+}
+	  
+std::list< int> List;
+std::list< int>::iterator itList;
+for( itList = List.begin(); itList != List.end(); )
+{
+	if( WillDelete( *itList) )
+	{
+	   List.erase( itList++);// itList 指向下一个元素   itList++返回原来的元素
+	}
+	else
+	   itList++;
+}
+
+错误使用:
+std::list< int> List;
+std::list< int>::iterator itList;
+for( itList = List.begin(); itList != List.end(); itList++) // 元素已经删除 不能再用他来获取下一个元素的位置
+{
+	if( WillDelete( *itList) )
+	{
+	   List.erase( itList);
+	}
+}
+
+std::list< int> List;
+std::list< int>::iterator itList;
+for( itList = List.begin(); itList != List.end(); )
+{
+	if( WillDelete( *itList) )
+	{
+	   itList = List.erase( ++itList); << 删除了下一个元素,又指向了它
+	}
+	else
+	   itList++;
+}
+	  
+举例说明:
+	  
+int main ()
+{
+  std::list<int> mylist;
+  std::list<int>::iterator it1,it2;
+
+  // set some values:
+  for (int i=1; i<10; ++i) mylist.push_back(i*10);
+
+                              // 10 20 30 40 50 60 70 80 90
+  it1 = it2 = mylist.begin(); // ^^
+  advance (it2,6);            // ^                 ^
+  ++it1;                      //    ^              ^
+
+  it1 = mylist.erase (it1);   // 10 30 40 50 60 70 80 90
+                              //    ^           ^
+
+  it2 = mylist.erase (it2);   // 10 30 40 50 60 80 90
+                              //    ^           ^
+
+  ++it1;                      //       ^        ^
+  --it2;                      //       ^     ^
+
+  mylist.erase (it1,it2);     // 10 30 60 80 90
+                              //        ^
+
+  std::cout << "mylist contains:";
+  for (it1=mylist.begin(); it1!=mylist.end(); ++it1)
+    std::cout << ' ' << *it1;
+  std::cout << '\n';
+
+  return 0;
+}
