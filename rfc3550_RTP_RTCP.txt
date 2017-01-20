@@ -1922,10 +1922,10 @@ RFC 3550                          RTP                          July 2003
    approach should be applied to the multiple sessions of a layered
    encoding scheme (see Section 2.4).
 
-6.4 Sender and Receiver Reports
-
-   RTP receivers provide reception quality feedback using RTCP report
-   packets which may take one of two forms depending upon whether or not
+6.4 Sender and Receiver Reports												5种RTCP报告 报告当前控制信息	
+																			200 SR(Sender Report 发送方报告) 201 RR(Receiver Report接收方报告)
+   RTP receivers provide reception quality feedback using RTCP report		202 SDES(Source Description 源描述报告) 203 BYE(Goodbye 离开报告)
+   packets which may take one of two forms depending upon whether or not	204 APP(Application-defined 应用定义)
    the receiver is also a sender.  The only difference between the
    sender report (SR) and receiver report (RR) forms, besides the packet
    type code, is that the sender report includes a 20-byte sender
@@ -1967,23 +1967,23 @@ RFC 3550                          RTP                          July 2003
 6.4.1 SR: Sender Report RTCP Packet
 
         0                   1                   2                   3
-        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+        0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1			RTCP基本报文结构 (发送者报告)
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-header |V=2|P|    RC   |   PT=SR=200   |             length            |
+header |V=2|P|    RC   |   PT=SR=200   |             length            |		头部  P:填充位=1的话包头后附加信息(?) RC:RTCP包报告块数目 最多31 PT:RTCP包类型RR SR SDES BYE APP  length不包含头部32bits的长度(4字节单位) RTCP报文是4字节对齐 length=0代表只有头部
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                         SSRC of sender                        |
+       |                         SSRC of sender                        |		SR 接收端同步多媒体流
        +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-sender |              NTP timestamp, most significant word             |
-info   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+sender |              NTP timestamp, most significant word             |		64bits 从1900.1.1开始计数
+info   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+		高32bit是整数部分(秒) 低32bit是秒后面小数
        |             NTP timestamp, least significant word             |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                         RTP timestamp                         |
+       |                         RTP timestamp                         |		RTP时间戳 以RTP媒体流的时钟为单位  
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                     sender's packet count                     |
+       |                     sender's packet count                     |		从这个会话开始到现在(发出RTCP报文时)已经发出的数据分组个数
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      sender's octet count                     |
+       |                      sender's octet count                     |		从这个会话开始到现在(发出RTCP报文时)已经发出的字节数
        +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-report |                 SSRC_1 (SSRC of first source)                 |
+report |                 SSRC_1 (SSRC of first source)                 |		这个就是RC Report Block Count 报告块数目
 block  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
   1    | fraction lost |       cumulative number of packets lost       |
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -2038,7 +2038,7 @@ RFC 3550                          RTP                          July 2003
       individual packet and add padding to the last individual packet.
 
    reception report count (RC): 5 bits
-      The number of reception report blocks contained in this packet.  A
+      The number of reception report blocks contained in this packet.  A	
       value of zero is valid.
 
    packet type (PT): 8 bits
@@ -2305,23 +2305,23 @@ RFC 3550                          RTP                          July 2003
         0                   1                   2                   3
         0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-header |V=2|P|    RC   |   PT=RR=201   |             length            |
+header |V=2|P|    RC   |   PT=RR=201   |             length            |				RR包 保证传输质量 数据接受者都要发RR包
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                     SSRC of packet sender                     |
+       |                     SSRC of packet sender                     |				
        +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-report |                 SSRC_1 (SSRC of first source)                 |
+report |                 SSRC_1 (SSRC of first source)                 |				SSRC同步源  这个报告反馈给谁
 block  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-  1    | fraction lost |       cumulative number of packets lost       |
+  1    | fraction lost |       cumulative number of packets lost       |				丢包率fraction lost(8bit)  这个报告周期丢失的包/期待的包数量	 
+       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+				丢包数量 	24bit带符号整形 累计丢失包个数=期待接收包数目-实际接收包数目 期待接收包数目=最后一个包序号-初始包序号
+       |           extended highest sequence number received           |				扩展高位序列号 低16bit 当前收到的RTP报文序列号 高16 扩展位 标识序列号周期计数	
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |           extended highest sequence number received           |
+       |                      interarrival jitter                      |				抖动评估 32bits ???
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                      interarrival jitter                      |
+       |                         last SR (LSR)                         |				????
        +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                         last SR (LSR)                         |
-       +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-       |                   delay since last SR (DLSR)                  |
+       |                   delay since last SR (DLSR)                  |				
        +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
-report |                 SSRC_2 (SSRC of second source)                |
+report |                 SSRC_2 (SSRC of second source)                |				~其他同步源
 block  +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
   2    :                               ...                             :
        +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+

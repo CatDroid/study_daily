@@ -3057,7 +3057,7 @@ RFC 2326              Real Time Streaming Protocol            April 1998
           Range time value returned or implied. Thus, there is no
           guarantee that the packet with the sequence number indicated
           by seq actually has the timestamp indicated by rtptime.) The
-          client uses this value to calculate the mapping of RTP time to	客户端使用这个值计算 RTP时间映射到 正常播放时间
+          client uses this value to calculate the mapping of RTP time to	客户端使用这个值计算 RTP时间(RTP time)映射到 正常播放时间NPT
           NPT.
 
      A mapping from RTP timestamps to NTP timestamps (wall clock) is		RTP 时间到 NTP 时间映射 可以通过RTCP
